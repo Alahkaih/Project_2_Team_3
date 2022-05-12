@@ -22,9 +22,9 @@ public class LocationQueryService {
 //    }
 
     public LocationQuery addSearch(LocationQuery locationQuery) {
-        if(locationQuery.getLocationName().isEmpty()) {
+        if(locationQuery.getLocationName() == null || locationQuery.getLocationName().isEmpty()) {
             throw new NullPointerException("Location name can't be null");
-        } else if(locationQuery.getStatus().isEmpty()) {
+        } else if(locationQuery.getStatus() == null || locationQuery.getStatus().isEmpty()) {
             throw new NullPointerException("Status can't be null");
         } else if(locationQuery.getPopulation() == null) {
             throw new NullPointerException("Population can't be null");
@@ -59,7 +59,7 @@ public class LocationQueryService {
                 retList = locationQueryRepository.findAllByVaccinatedPopulation(minNum);
                 break;
             case "total_infections":
-                retList = locationQueryRepository.findAllByNumInfections(minNum);
+                retList = locationQueryRepository.findAllByTotalInfections(minNum);
                 break;
             case "total_deaths":
                 retList = locationQueryRepository.findAllByTotalDeaths(minNum);
