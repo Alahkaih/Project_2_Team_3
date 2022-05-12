@@ -13,7 +13,7 @@ spring:
   datasource:
     username: root
     password: Ccc12345!!!
-    url: jdbc:mysql://34.130.53.121:3306/LocationSearchAPI_db
+    url: jdbc:mysql://34.130.53.121:3306/covidTrackerDB
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database: mysql
