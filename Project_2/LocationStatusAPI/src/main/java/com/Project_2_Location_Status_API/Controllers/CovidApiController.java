@@ -23,7 +23,7 @@ public class CovidApiController {
 
     @GetMapping("search") // covid-api/search?country=nameOfCountry
     public ResponseEntity<String> getDataByCountry(@RequestParam String country){
-    return ResponseEntity.ok(covidApiService.getAllData(country).getBody());
+    return ResponseEntity.ok(covidApiService.getAllDataByCountry(country).getBody());
     }
 
 }
