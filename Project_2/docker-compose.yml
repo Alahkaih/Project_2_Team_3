@@ -12,7 +12,7 @@ services:
     image: location_search_api:latest
     container_name: LocationSearchAPI
     ports:
-      - "7000:7000"
+      - "7000:8081"
   prom:
     image: 'bitnami/prometheus'
     container_name: prometheus
