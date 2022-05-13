@@ -1,8 +1,7 @@
-package com.Project_2_Location_Search_API;
+package com.Project_2_Location_Search_API.service;
 
 import com.Project_2_Location_Search_API.entities.LocationQuery;
 import com.Project_2_Location_Search_API.repositories.LocationQueryRepository;
-import com.Project_2_Location_Search_API.service.LocationQueryService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,9 +9,10 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class LocationQueryServiceTests {
+public class LocationQueryServiceTest {
     private LocationQueryService locationQueryService;
     private LocationQueryRepository mockLocationQueryRepository;
 
