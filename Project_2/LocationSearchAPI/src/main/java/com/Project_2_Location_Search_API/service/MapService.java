@@ -1,16 +1,8 @@
 package com.Project_2_Location_Search_API.service;
 
-import io.micrometer.core.instrument.util.IOUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 
 @Service
 public class MapService {
