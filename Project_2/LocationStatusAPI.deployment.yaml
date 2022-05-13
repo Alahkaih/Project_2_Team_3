@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: deployment
+metadata:
+  name: LocationStatusAPI
+  labels:
+    app: API
+    tier: data
+spec:
+  replicas: 1
+  selector:
+    matchlabels:
+      tier: data
+    template:
+      metadata:
+        labels:
+          app: API
+          tier: data
+      spec:
+        containers:
+          - name: LocationStatusAPI
+            image: ./LocationStatusAPI/target/LocationStatusAPI.jar
+            ports:
+              - containerPort: 8000
+            imagePullPolicy: Always
