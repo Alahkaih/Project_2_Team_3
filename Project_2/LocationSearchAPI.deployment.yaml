@@ -3,18 +3,18 @@ kind: deployment
 metadata:
   name: LocationSearchAPI
   labels:
-    app: API
-    tier: data
+    app: LocationSearchAPI
+    tier: webserver
 spec:
   replicas: 1
   selector:
     matchlabels:
-      tier: data
+      tier: webserver
     template:
       metadata:
         labels:
-          app: API
-          tier: data
+          app: LocationSearchAPI
+          tier: webserver
       spec:
         containers:
           - name: LocationSearchAPI
