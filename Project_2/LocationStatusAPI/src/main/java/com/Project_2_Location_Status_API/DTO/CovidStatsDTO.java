@@ -21,6 +21,7 @@ public class CovidStatsDTO {
     private Integer recovered;
     private Integer deaths;
     private Integer population;
+    private Object timeline;
 
 
 }

@@ -1,6 +1,7 @@
 package com.Project_2_Location_Status_API.Services;
 
 import com.Project_2_Location_Status_API.DTO.CovidStatsDTO;
+import com.Project_2_Location_Status_API.DTO.VaccineDataDTO;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -40,7 +41,7 @@ public class CovidApiService {
         return 70;
     }
 
-    public ResponseEntity<String> getAllVaccineDataByCountry(String country) {
+    public ResponseEntity<VaccineDataDTO> getAllVaccineDataByCountry(String country) {
 
         RestTemplate covidApiRestTemplate = new RestTemplate();
 
@@ -50,7 +51,7 @@ public class CovidApiService {
 
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
 
-        return covidApiRestTemplate.exchange(GET_COVID_VACCINE_INFO + country + "?lastdays=1&fullData=false", HttpMethod.GET, entity, String.class);
+        return covidApiRestTemplate.exchange(GET_COVID_VACCINE_INFO + country + "?lastdays=1&fullData=false", HttpMethod.GET, entity, VaccineDataDTO.class);
 
     }
 

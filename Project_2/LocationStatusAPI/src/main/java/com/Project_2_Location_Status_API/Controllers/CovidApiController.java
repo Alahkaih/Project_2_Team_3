@@ -1,6 +1,7 @@
 package com.Project_2_Location_Status_API.Controllers;
 
 import com.Project_2_Location_Status_API.DTO.CovidStatsDTO;
+import com.Project_2_Location_Status_API.DTO.VaccineDataDTO;
 import com.Project_2_Location_Status_API.Services.CovidApiService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class CovidApiController {
     }
 
     @GetMapping("vaccine-data") // covid-api/vaccine-data?country=nameOfCountry
-    public ResponseEntity<String> getVaccineDataByCountry(@RequestParam String country){
+    public ResponseEntity<VaccineDataDTO> getVaccineDataByCountry(@RequestParam String country){
         return ResponseEntity.ok(covidApiService.getAllVaccineDataByCountry(country).getBody());
     }
 
