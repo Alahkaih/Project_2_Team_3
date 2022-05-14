@@ -9,8 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MapRequest {
-
-    // String center, String zoom, String size, String marker1, String marker2, String path
     private String center;
     private String marker1;
     private String marker2;
