@@ -40,4 +40,9 @@ public class MapController {
     public ResponseEntity general(@RequestParam String q) {
         return ResponseEntity.ok(mapService.getGeneral(q).getBody());
     }
+
+    @GetMapping("/showmap")
+    public ResponseEntity showMap(@RequestParam String center, @RequestParam String zoom, @RequestParam String size, @RequestParam String marker1, @RequestParam String marker2, @RequestParam String path) {
+        return mapService.getMap(center, zoom, size, marker1, marker2, path);
+    }
 }
