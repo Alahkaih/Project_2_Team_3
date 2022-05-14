@@ -64,8 +64,8 @@ public class MapService {
         return fetchRequest(url);
     }
 
-    public  ResponseEntity getMap(String center, String zoom, String size, String marker1, String marker2, String path) {
-        String url = String.format("%s/staticmap?key=%s&center=%s&zoom=%s&size=%s&markers=%s&markers=%s&path=%s", mapBaseURL, key, center, zoom, size, marker1, marker2, path);
+    public  ResponseEntity getMap(String center, String marker1, String marker2, String path) {
+        String url = String.format("%s/staticmap?key=%s&center=%s&zoom=16&size=480x480&markers=%s&markers=%s&path=%s", mapBaseURL, key, center, marker1, marker2, path);
         return fetchImage(url);
     }
 }
