@@ -1,4 +1,4 @@
-package com.Project_2_Location_Status_API.Entities;
+package com.Project_2_Location_Status_API.DTO;
 
 import lombok.*;
 
@@ -6,14 +6,14 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name= "CovidStats")
+@Table(name= "CovidStatsDTO")
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class CovidStats {
+public class CovidStatsDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
