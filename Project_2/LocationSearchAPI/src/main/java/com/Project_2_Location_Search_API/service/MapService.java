@@ -1,8 +1,10 @@
 package com.Project_2_Location_Search_API.service;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
 
 @Service
 public class MapService {
@@ -12,9 +14,13 @@ public class MapService {
 
     private ResponseEntity fetchRequest(String url) {
         RestTemplate restTemplate = new RestTemplate();
-        String res = restTemplate.getForObject(url, String.class);
-        System.out.println(res);
-        return ResponseEntity.ok(res);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+
+        HttpEntity<String> entity = new HttpEntity<>("parameters",headers);
+        return restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
     }
 
     public ResponseEntity getByPostalCode(String postalcode, String countrycodes, String format) {

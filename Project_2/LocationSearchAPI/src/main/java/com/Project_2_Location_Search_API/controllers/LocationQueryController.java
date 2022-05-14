@@ -21,9 +21,8 @@ public class LocationQueryController {
 
     @PostMapping("/")
     public void addLocationQuery(@RequestBody LocationQuery locationQuery) {
-        System.out.println("HERE");
-        boolean success = locationQueryService.addSearch(locationQuery);
-        if (success == false) {
+        LocationQuery locationQueryAdded = locationQueryService.addSearch(locationQuery);
+        if (locationQueryAdded == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error happened when adding a search object");
         }
     }
