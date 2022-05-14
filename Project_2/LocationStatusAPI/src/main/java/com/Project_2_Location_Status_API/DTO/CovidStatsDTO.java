@@ -11,10 +11,16 @@ import java.time.LocalDate;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
+
+
 public class CovidStatsDTO {
 
     private String country;
-    private String cases;
-    private Integer todayCases;
+    private Object countryInfo; //contains abbreviated tags for country's(i.e. USA) and url for a flag img, among other info
+    private Integer cases;
+    private Integer recovered;
+    private Integer deaths;
+    private Integer population;
+
 
 }
