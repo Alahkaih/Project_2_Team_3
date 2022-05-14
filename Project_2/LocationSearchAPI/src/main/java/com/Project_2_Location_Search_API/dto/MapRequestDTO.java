@@ -1,4 +1,4 @@
-package com.Project_2_Location_Search_API.entities;
+package com.Project_2_Location_Search_API.dto;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class MapRequest {
+public class MapRequestDTO {
     private String center;
     private String marker1;
     private String marker2;

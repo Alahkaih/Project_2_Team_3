@@ -1,6 +1,6 @@
 package com.Project_2_Location_Search_API.controllers;
 
-import com.Project_2_Location_Search_API.entities.MapRequest;
+import com.Project_2_Location_Search_API.dto.MapRequestDTO;
 import com.Project_2_Location_Search_API.service.MapService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class MapController {
     }
 
     @PostMapping("/showmap")
-    public ResponseEntity showMap(@RequestBody MapRequest mapRequest) {
-        return mapService.getMap(mapRequest.getCenter(), mapRequest.getMarker1(), mapRequest.getMarker2(), mapRequest.getPath());
+    public ResponseEntity showMap(@RequestBody MapRequestDTO mapRequestDTO) {
+        return mapService.getMap(mapRequestDTO.getCenter(), mapRequestDTO.getMarker1(), mapRequestDTO.getMarker2(), mapRequestDTO.getPath());
     }
 }
