@@ -24,18 +24,7 @@ public class CovidApiController {
     public ResponseEntity<CovidStatsDTO> getDataByCountry(@RequestParam String country){
         return ResponseEntity.ok(covidApiService.getAllDataByCountry(country).getBody());
     }
-//
-//    @GetMapping("calculate")
-//    public ResponseEntity<String> getStatusBasedOnLocation(@RequestParam String country) {
-//
-//        ResponseEntity<CovidStatsDTO> response = covidApiService.getAllDataByCountry(country);
-//        Integer score = covidApiService.calculateStatus(response);
-//
-//        if (score < 50) {
-//            return ResponseEntity.ok().body("This locations is currently unsafe to visit.");
-//        }
-//        return ResponseEntity.ok().body("This location is currently safe to visit.");
-//    }
+
 
     @GetMapping("vaccine-data") // covid-api/vaccine-data?country=nameOfCountry
     public ResponseEntity<VaccineDataDTO> getVaccineDataByCountry(@RequestParam String country){
