@@ -33,13 +33,13 @@ public class CovidApiService {
         return covidApiRestTemplate.exchange(GET_COVID_API + country, HttpMethod.GET,entity, CovidStatsDTO.class);
     }
 
-    public Integer calculateStatus (ResponseEntity<CovidStatsDTO> response) {
-
-//        Can access the response to get whatever information you need for the calculations (check below for example)
-//        String cases = response.getBody().getCases();
-
-        return 70;
-    }
+//    public Integer calculateStatus (ResponseEntity<CovidStatsDTO> response) {
+//
+////        Can access the response to get whatever information you need for the calculations (check below for example)
+////        String cases = response.getBody().getCases();
+//
+//        return 70;
+//    }
 
     public ResponseEntity<VaccineDataDTO> getAllVaccineDataByCountry(String country) {
 
