@@ -26,9 +26,11 @@ public class Status {
     @Column(name = "location")
     private String location;
 
-//    @Column(name ="status")
-//    private String status;
+
+
+//    @Column(name ="statusReport")
+//    private String statusReport;
 
     @Column(name = "creationDate")
-    private String creationDate;
+    private LocalDate creationDate;
 }
