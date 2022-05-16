@@ -7,18 +7,13 @@ metadata:
     tier: webserver
 spec:
   replicas: 1
-  selector:
-    matchlabels:
-      tier: webserver
-    template:
-      metadata:
-        labels:
-          app: LocationStatusAPI
-          tier: webserver
-      spec:
-        containers:
-          - name: LocationStatusAPI
-            image: ./LocationStatusAPI/target/LocationStatusAPI.jar
-            ports:
-              - containerPort: 8000
-            imagePullPolicy: Always
+  template:
+    metadata:
+      labels:
+        app: LocationStatusAPI
+        tier: webserver
+    spec:
+      containers:
+        - name: LocationStatusAPI
+          image: LocationStatusAPI:latest
+          imagePullPolicy: Always

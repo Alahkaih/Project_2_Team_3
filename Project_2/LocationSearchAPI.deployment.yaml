@@ -1,24 +1,22 @@
-piVersion: v1
-kind: deployment
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: LocationSearchAPI
+  name: location-search-api
   labels:
-    app: LocationSearchAPI
+    app: location-search-api
     tier: webserver
 spec:
   replicas: 1
   selector:
-    matchlabels:
-      tier: webserver
-    template:
-      metadata:
-        labels:
-          app: LocationSearchAPI
-          tier: webserver
-      spec:
-        containers:
-          - name: LocationSearchAPI
-            image: ./LocationSearchAPI/target/LocationSearchAPI.jar
-            ports:
-              - containerPort: 7000
-            imagePullPolicy: Always
+    matchLabels:
+      app: location-search-api
+  template:
+    metadata:
+      labels:
+        app: location-search-api
+        tier: webserver
+    spec:
+      containers:
+        - name: location-search-api
+          image: LocationSearchAPI:latest
+          imagePullPolicy: Always
