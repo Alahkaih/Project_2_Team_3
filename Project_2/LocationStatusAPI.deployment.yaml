@@ -20,3 +20,16 @@ spec:
         - name: location-status-api
           image: LocationStatusAPI:latest
           imagePullPolicy: Always
+---
+apiVersion: v1
+kind: service
+metadata:
+  labels:
+    app: webserver
+  name: webserver
+spec:
+  ports:
+    - port: 90
+  selector:
+    app: location-status-api
+  type: NodePort
