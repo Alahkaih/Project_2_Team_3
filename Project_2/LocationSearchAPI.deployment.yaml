@@ -18,5 +18,5 @@ spec:
     spec:
       containers:
         - name: location-search-api
-          image: LocationSearchAPI:latest
+          image: alahkaih/location-search-api:latest
           imagePullPolicy: Always
