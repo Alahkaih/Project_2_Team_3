@@ -42,23 +42,15 @@ public class StatusService {
     public int calculateScore(CovidStatsDTO covidStats, VaccineDataDTO vaccineStats) {
         if (covidStats == null || vaccineStats == null)
             throw new NullPointerException("No data found for country provided");
-        Status status = new Status();
         int numOfPopVaccinated = vaccineStats.getTimeline().fields().next().getValue().asInt();
         int totalPopulation = covidStats.getPopulation();
-//        String status;
-        int percentVaccinated;
-        return percentVaccinated = (totalPopulation / numOfPopVaccinated) * 100;
+        int percentVaccinated = (totalPopulation / numOfPopVaccinated) * 100;
+        return percentVaccinated;
     }
 
     public String calculateStatusReport(int percentVaccinated) {
-
-//
-        if (percentVaccinated > 80) {
-            return "Safe to travel";
-        } else if (percentVaccinated > 40 && percentVaccinated < 80) {
-            return "Proceed with caution";
-        } else {
-            return "Not safe to travel";
-        }
+        boolean safe = percentVaccinated > 80;
+        boolean caution = percentVaccinated > 40 && percentVaccinated < 80;
+        return safe ? "Safe to travel" : caution ? "Proceed with caution" : "Not safe to travel";
     }
 }
