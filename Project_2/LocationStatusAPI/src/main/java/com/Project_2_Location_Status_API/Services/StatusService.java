@@ -47,13 +47,13 @@ public class StatusService {
 
         double totalPopulation = covidStats.getPopulation();
         /**
-         * vaccineStats returns the total num of doses rolled out in a country(to-date)
-         * so assuming a double dose vaccine policy for each country the returned num is divided by 2
-         * therefore, administeredVax returns an approximate number of vaccines administered in a country
+         * vaccineStats returns the total num of doses administered in a country(to-date)
+         * so assuming a double dose vaccine policy ,the returned num is divided by 2
+         * therefore, popVaccinated returns an approximate number of people vaccinated(with double dose) in a country
          */
-        double administeredVax = vaccineStats.getTimeline().fields().next().getValue().asDouble() /2;
+        double popVaccinated = vaccineStats.getTimeline().fields().next().getValue().asDouble() /2;
 
-            return  (administeredVax/totalPopulation) * 100;
+            return  (popVaccinated/totalPopulation) * 100;
     }
 
     public String calculateStatusReport(double percentVaccinated) {
