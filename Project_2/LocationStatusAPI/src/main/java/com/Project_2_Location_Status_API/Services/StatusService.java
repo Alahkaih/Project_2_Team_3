@@ -5,6 +5,7 @@ import com.Project_2_Location_Status_API.DTO.VaccineDataDTO;
 import com.Project_2_Location_Status_API.Entities.Status;
 import com.Project_2_Location_Status_API.Repositories.StatusRepository;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class StatusService {
     public void saveNewStatus(Status status) {
         if (status.getLocation() == null || status.getLocation().isEmpty()) {
             throw new NullPointerException("Can't create a status without a location");
-        } else if (status.getScore() == null || status.getScore() < 0) {
+        } else if (status.getScore() == 0 || status.getScore() < 0) {
             throw new NullPointerException("Can't create a status with a null or negative score");
         } else if (status.getCreationDate() == null) {
             throw new NullPointerException("Can't create a status with a null creation date");
@@ -39,16 +40,20 @@ public class StatusService {
         }
     }
 
-    public int calculateScore(CovidStatsDTO covidStats, VaccineDataDTO vaccineStats) {
-        if (covidStats == null || vaccineStats == null)
+    public double calculateScore(CovidStatsDTO covidStats, VaccineDataDTO vaccineStats) {
+        if (covidStats == null  || vaccineStats == null)
             throw new NullPointerException("No data found for country provided");
-        int numOfPopVaccinated = vaccineStats.getTimeline().fields().next().getValue().asInt();
-        int totalPopulation = covidStats.getPopulation();
-        int percentVaccinated = (totalPopulation / numOfPopVaccinated) * 100;
-        return percentVaccinated;
+        double totalPopulation = covidStats.getPopulation();
+        /**
+         * vaccineStats returns the total num of doses administered in a country(to-date)
+         * so assuming a double dose vaccine policy ,the returned num is divided by 2
+         * therefore, popVaccinated returns an approximate number of people vaccinated(with double dose) in a country
+         */
+        double popVaccinated = vaccineStats.getTimeline().fields().next().getValue().asDouble() /2;
+        return  (popVaccinated/totalPopulation) * 100;
     }
 
-    public String calculateStatusReport(int percentVaccinated) {
+    public String calculateStatusReport(double percentVaccinated) {
         boolean safe = percentVaccinated > 80;
         boolean caution = percentVaccinated > 40 && percentVaccinated < 80;
         return safe ? "Safe to travel" : caution ? "Proceed with caution" : "Not safe to travel";
