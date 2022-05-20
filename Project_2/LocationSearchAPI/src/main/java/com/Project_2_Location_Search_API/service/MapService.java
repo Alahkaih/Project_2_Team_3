@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class MapService {
@@ -49,8 +51,12 @@ public class MapService {
         return fetchRequest(url);
     }
 
-    public ResponseEntity getByLimitCountry(String q, String format, String countrycodes) {
-        String url = String.format("%s/autocomplete.php?key=%s&q=%s&format=%s&countrycodes=%s", baseURL, key, q, format, countrycodes);
+    public ResponseEntity getByLimitCountryState(String state, String format, String countrycodes) {
+        String[] listOfUsStates = new String[] {"alabama", "alaska", "arizona", "arkansas", "california", "colorado", "connecticut", "delaware", "florida", "georgia", "hawaii", "idaho", "illinois", "indiana", "iowa", "kansas", "kentucky", "louisiana", "maine", "maryland", "massachusetts", "michigan", "minnesota", "mississippi", "missouri", "montana", "nebraska", "nevada", "new hampshire", "new jersey", "new mexico", "new york", "north carolina", "ohio", "oklahoma", "oregon", "pennsylvania", "rhode island", "south carolina", "south dakota", "tennessee", "texas", "utah", "vermont", "virginia", "washington", "west virginia", "wisconsin", "wyoming"};
+        if (!Arrays.asList(listOfUsStates).contains(state.toLowerCase())) {
+            throw new UnsupportedOperationException("US states only");
+        }
+        String url = String.format("%s/autocomplete.php?key=%s&q=%s&format=%s&countrycodes=%s", baseURL, key, state, format, countrycodes);
         return fetchRequest(url);
     }
 
@@ -64,8 +70,10 @@ public class MapService {
         return fetchRequest(url);
     }
 
-    public  ResponseEntity getMap(String center, String marker1, String path) {
-        String url = String.format("%s/staticmap?key=%s&center=%s&zoom=16&size=480x480&markers=%s&path=%s", mapBaseURL, key, center, marker1, path);
+    public  ResponseEntity getMap(String center, String marker1) {
+//        System.out.println(center);
+//        System.out.println(marker1);
+        String url = String.format("%s/staticmap?key=%s&center=%s&zoom=4&size=480x480&markers=%s", mapBaseURL, key, center, marker1);
         return fetchImage(url);
     }
 }
