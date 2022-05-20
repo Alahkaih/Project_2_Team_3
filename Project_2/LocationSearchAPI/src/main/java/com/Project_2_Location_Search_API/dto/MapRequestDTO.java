@@ -11,6 +11,6 @@ import lombok.*;
 public class MapRequestDTO {
     private String center;
     private String marker1;
-    private String marker2;
+//    private String marker2;
     private String path;
 }
