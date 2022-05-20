@@ -17,17 +17,14 @@ public class MapController {
     @Setter(onMethod =@__({@Autowired}))
     private MapService mapService;
 
-    @GetMapping("/postal")
-    public ResponseEntity postalCodeQuery(@RequestParam String postalcode, @RequestParam String countrycodes, @RequestParam String format) {
-        return ResponseEntity.ok(mapService.getByPostalCode(postalcode, countrycodes, format).getBody());
-    }
+
 
     @GetMapping("/structured")
     public ResponseEntity structuredQuery(@RequestParam String street, @RequestParam String city, @RequestParam String county, @RequestParam String state, @RequestParam String country, @RequestParam String postalcode, @RequestParam String format) {
         return ResponseEntity.ok(mapService.getByStructured(street, city, county, state, country, postalcode, format).getBody());
     }
 
-    @GetMapping("/limitCountryState")
+    @GetMapping("/state_info")
     public ResponseEntity limitCountryState(@RequestParam String state, @RequestParam String format, @RequestParam String countrycodes) {
         Object places = mapService.getByLimitCountryState(state, format, countrycodes).getBody();
         try {
@@ -38,13 +35,7 @@ public class MapController {
         }
         return null;
     }
-
-    @GetMapping("/fromQuery")
-    public ResponseEntity fromQuery(@RequestParam String q, @RequestParam String format) {
-        return ResponseEntity.ok(mapService.getByQuery(q, format).getBody());
-    }
-
-    @GetMapping("/general")
+    @GetMapping("/landmark")
     public ResponseEntity general(@RequestParam String q) {
         return ResponseEntity.ok(mapService.getGeneral(q).getBody());
     }
