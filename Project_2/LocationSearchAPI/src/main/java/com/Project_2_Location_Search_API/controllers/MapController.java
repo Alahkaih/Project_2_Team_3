@@ -41,6 +41,6 @@ public class MapController {
 
     @PostMapping("/showmap")
     public ResponseEntity showMap(@RequestBody MapRequestDTO mapRequestDTO) {
-        return mapService.getMap(mapRequestDTO.getCenter(), mapRequestDTO.getMarker1(), mapRequestDTO.getMarker2(), mapRequestDTO.getPath());
+        return mapService.getMap(mapRequestDTO.getCenter(), mapRequestDTO.getMarker1(), mapRequestDTO.getPath());
     }
 }
