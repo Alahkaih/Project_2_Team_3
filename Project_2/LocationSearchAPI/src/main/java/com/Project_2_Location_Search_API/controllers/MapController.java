@@ -32,26 +32,11 @@ public class MapController {
         Object places = mapService.getByLimitCountryState(state, format, countrycodes).getBody();
         try {
             JSONArray jsonArray = (JSONArray) new JSONParser().parse(places.toString());
-            //System.out.println(jsonArray.get(0));
-//            Object first = jsonArray.get(0);
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            MapResponseDTO mapResponseDTO = objectMapper.readValue(first, MapResponseDTO.class);
             return ResponseEntity.ok(jsonArray.get(0));
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return null;
-//        for (int i=0; i < listOfPlaces.size(); i++) {
-//            System.out.println(listOfPlaces.get(i));
-//        }
-//        StringBuilder sanitize = new StringBuilder(listOfPlaces.toString());
-//        sanitize.deleteCharAt(0);
-//        sanitize.deleteCharAt(listOfPlaces.toString().length()-2);
-//        String[] splitUp = sanitize.toString().split(",");
-//        for (int i=0; i < splitUp.length; i++) {
-//            System.out.println(splitUp[i]);
-//        }
-//        List<String> list = Stream.of(object).map(Object::toString).collect(Collectors.toList())
     }
 
     @GetMapping("/fromQuery")
@@ -66,6 +51,6 @@ public class MapController {
 
     @PostMapping("/showmap")
     public ResponseEntity showMap(@RequestBody MapRequestDTO mapRequestDTO) {
-        return mapService.getMap(mapRequestDTO.getCenter(), mapRequestDTO.getMarker1());
+        return mapService.getMap(mapRequestDTO.getState(), mapRequestDTO.getFormat(), mapRequestDTO.getCountrycodes());
     }
 }
