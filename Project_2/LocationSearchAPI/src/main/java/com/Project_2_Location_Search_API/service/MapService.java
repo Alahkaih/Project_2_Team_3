@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class MapService {
@@ -56,14 +54,19 @@ public class MapService {
         return fetchRequest(url);
     }
 
-    public ResponseEntity getByLimitCountryState(String state, String format, String countrycodes) {
+    public ResponseEntity getStateInfo(String state, String format, String countryCodes) {
         String[] listOfUsStates = new String[] {"alabama", "alaska", "arizona", "arkansas", "california", "colorado", "connecticut", "delaware", "florida", "georgia", "hawaii", "idaho", "illinois", "indiana", "iowa", "kansas", "kentucky", "louisiana", "maine", "maryland", "massachusetts", "michigan", "minnesota", "mississippi", "missouri", "montana", "nebraska", "nevada", "new hampshire", "new jersey", "new mexico", "new york", "north carolina", "ohio", "oklahoma", "oregon", "pennsylvania", "rhode island", "south carolina", "south dakota", "tennessee", "texas", "utah", "vermont", "virginia", "washington", "west virginia", "wisconsin", "wyoming"};
         if (!Arrays.asList(listOfUsStates).contains(state.toLowerCase())) {
             throw new UnsupportedOperationException("US states only");
         }
-        String url = String.format("%s/autocomplete.php?key=%s&q=%s&format=%s&countrycodes=%s", baseURL, key, state, format, countrycodes);
+        String url = String.format("%s/autocomplete.php?key=%s&q=%s&format=%s&countryCodes=%s", baseURL, key, state, format, countryCodes);
         return fetchRequest(url);
     }
+
+    public ResponseEntity getLocationInfo(String country, String format){
+        String url = String.format("%s/autocomplete.php?key=%s&q=%s&format=%s", baseURL, key, country, format);
+        return fetchRequest(url);
+            }
 
     public ResponseEntity getByQuery(String q, String format) {
         String url = String.format("%s/autocomplete.php?key=%s&q=%s&format=%s", baseURL, key, q, format);
@@ -75,8 +78,10 @@ public class MapService {
         return fetchRequest(url);
     }
 
-    public  ResponseEntity getMap(String state, String format, String countrycodes) {
-        ResponseEntity response = getByLimitCountryState(state, format, countrycodes);
+
+    public ResponseEntity getLocationMap(String country, String format) {
+
+        ResponseEntity response = getLocationInfo(country, format);
         try {
             JSONArray jsonArray = (JSONArray) new JSONParser().parse(response.getBody().toString());
             Object first = jsonArray.get(0);

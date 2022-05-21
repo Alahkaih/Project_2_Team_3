@@ -39,7 +39,7 @@ public class LocationQueryController {
     }
 
     @GetMapping("{country}")
-    public ResponseEntity getCountryStatus(@PathVariable String country){
+    public ResponseEntity getCountryStatusMap(@PathVariable String country){
         StatusReport statusReport =locationQueryService.requestStatusReportByCountry(country);
         return ResponseEntity.ok(statusReport.getStatus());
         //Add call to map api to show interface
