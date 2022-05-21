@@ -1,5 +1,6 @@
 package com.Project_2_Location_Search_API.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.awt.*;
 import java.util.Arrays;
 
 @Service
+@Slf4j
 public class MapService {
 
     private final String key = "pk.4e3f27d87b71d3a12326e0641a621a8d";
@@ -31,8 +34,7 @@ public class MapService {
 
     private ResponseEntity fetchImage(String url) {
 
-        // Before fetching the image, we should make a request to the status API to get the status of the place
-        // Then, we make use of ImageProcessor to hopefully draw it on the image
+
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -84,6 +86,7 @@ public class MapService {
         return fetchRequest(url);
     }
 
+
     public ResponseEntity getLocationMap(String country, String format) {
 
         ResponseEntity response = getLocationInfo(country, format);
@@ -111,6 +114,7 @@ public class MapService {
             String url = String.format("%s/staticmap?key=%s&center=%s&zoom=4&size=480x480&markers=%s", mapBaseURL, key, center, marker);
             //System.out.println(url);
             return fetchImage(url);
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
