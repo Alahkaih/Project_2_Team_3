@@ -6,17 +6,12 @@ import com.Project_2_Location_Search_API.entities.StatusReport;
 import com.Project_2_Location_Search_API.service.LocationQueryService;
 import com.Project_2_Location_Search_API.service.MapService;
 import lombok.Setter;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -48,8 +43,28 @@ public class LocationQueryController {
     }
 
     @GetMapping("{country}")
-    public String getCountryStatusMap(@PathVariable String country){
+    public String getCountryMap(@PathVariable String country){
         StatusReport statusReport =locationQueryService.requestStatusReportByCountry(country);
         return statusReport.getStatus();
     }
+/*
+    @GetMapping("{country}")
+    public ResponseEntity getCountryStatusMap(@PathVariable String country){
+
+
+        StatusReport statusReport =locationQueryService.requestStatusReportByCountry(country);
+        String status = statusReport.getStatus();
+        System.out.println(status);
+
+        ResponseEntity img = (mapService.getLocationMap(country,"json"));
+        System.out.println(img);
+
+
+
+        MapWithStatus mapWithStatus = new MapWithStatus((byte[]) img.getBody(),status);
+        return ResponseEntity.ok(mapWithStatus);
+
+        //Add call to map api to show interface
+    }
+*/
 }

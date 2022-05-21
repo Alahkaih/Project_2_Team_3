@@ -10,6 +10,6 @@ import org.springframework.http.ResponseEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MapWithStatus {
-    private ResponseEntity<byte[]> img;
+    private byte[] img;
     private String status;
 }
