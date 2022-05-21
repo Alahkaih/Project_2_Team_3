@@ -48,30 +48,8 @@ public class LocationQueryController {
     }
 
     @GetMapping("{country}")
-    public List<ResponseEntity> getCountryStatusMap(@PathVariable String country){
+    public String getCountryStatusMap(@PathVariable String country){
         StatusReport statusReport =locationQueryService.requestStatusReportByCountry(country);
-        String status = statusReport.getStatus();
-        ResponseEntity<String> statusResponse = new ResponseEntity<>(status, HttpStatus.OK);
-        System.out.println(statusResponse);
-
-        ResponseEntity img = ResponseEntity.ok((mapService.getLocationMap(country,"json")));
-        System.out.println(img.getBody());
-
-        MapWithStatus mapWithStatus = new MapWithStatus(img, status);
-
-        List<ResponseEntity> entities = new ArrayList<>();
-        entities.add(ResponseEntity.ok(mapWithStatus).getBody().getImg());
-        entities.add(statusResponse);
-        //return ResponseEntity.ok(mapWithStatus).getBody().getImg();
-//        return ResponseEntity.ok(mapWithStatus).getBody().getImg();
-//        return ResponseEntity.ok(entities);
-        return entities;
+        return statusReport.getStatus();
     }
-
-
-
-
-
-
-
 }
