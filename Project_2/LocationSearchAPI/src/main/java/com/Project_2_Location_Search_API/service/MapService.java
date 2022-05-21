@@ -30,10 +30,16 @@ public class MapService {
     }
 
     private ResponseEntity fetchImage(String url) {
+
+        // Before fetching the image, we should make a request to the status API to get the status of the place
+        // Then, we make use of ImageProcessor to hopefully draw it on the image
+
         RestTemplate restTemplate = new RestTemplate();
+
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         try {
             restTemplate.getMessageConverters().add(new ByteArrayHttpMessageConverter());
@@ -66,7 +72,7 @@ public class MapService {
     public ResponseEntity getLocationInfo(String country, String format){
         String url = String.format("%s/autocomplete.php?key=%s&q=%s&format=%s", baseURL, key, country, format);
         return fetchRequest(url);
-            }
+    }
 
     public ResponseEntity getByQuery(String q, String format) {
         String url = String.format("%s/autocomplete.php?key=%s&q=%s&format=%s", baseURL, key, q, format);
@@ -77,7 +83,6 @@ public class MapService {
         String url = String.format("%s/autocomplete.php?key=%s&q=%s", baseURL, key, q);
         return fetchRequest(url);
     }
-
 
     public ResponseEntity getLocationMap(String country, String format) {
 

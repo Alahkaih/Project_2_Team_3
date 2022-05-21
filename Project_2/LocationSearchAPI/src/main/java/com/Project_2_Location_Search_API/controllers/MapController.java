@@ -22,8 +22,8 @@ public class MapController {
     }
 
     @GetMapping("/state-info")
-    public ResponseEntity getStateInfo(@RequestParam String state, @RequestParam String format, @RequestParam String countryCodes) {
-        Object places = mapService.getStateInfo(state, format, countryCodes).getBody();
+    public ResponseEntity getStateInfo(@RequestParam String state, @RequestParam String format, @RequestParam String countrycodes) {
+        Object places = mapService.getStateInfo(state, format, countrycodes).getBody();
         try {
             JSONArray jsonArray = (JSONArray) new JSONParser().parse(places.toString());
             return ResponseEntity.ok(jsonArray.get(0));
@@ -32,12 +32,11 @@ public class MapController {
         }
         return null;
     }
+
     @GetMapping("/landmark")
     public ResponseEntity general(@RequestParam String q) {
         return ResponseEntity.ok(mapService.getGeneral(q).getBody());
     }
-
-
 
     @GetMapping("{location}")
     public ResponseEntity showLocationMap(@PathVariable String location){
