@@ -5,10 +5,8 @@ import com.Project_2_Location_Search_API.entities.LocationQuery;
 import com.Project_2_Location_Search_API.entities.StatusReport;
 import com.Project_2_Location_Search_API.service.LocationQueryService;
 import com.Project_2_Location_Search_API.service.MapService;
-import ij.IJ;
-import ij.ImagePlus;
-import ij.process.ImageProcessor;
 import lombok.Setter;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -49,21 +48,24 @@ public class LocationQueryController {
     }
 
     @GetMapping("{country}")
-    public ResponseEntity getCountryStatusMap(@PathVariable String country){
-
-
+    public List<ResponseEntity> getCountryStatusMap(@PathVariable String country){
         StatusReport statusReport =locationQueryService.requestStatusReportByCountry(country);
         String status = statusReport.getStatus();
-        System.out.println(status);
+        ResponseEntity<String> statusResponse = new ResponseEntity<>(status, HttpStatus.OK);
+        System.out.println(statusResponse);
 
-        ResponseEntity img = (mapService.getLocationMap(country,"json"));
-        System.out.println(img);
+        ResponseEntity img = ResponseEntity.ok((mapService.getLocationMap(country,"json")));
+        System.out.println(img.getBody());
 
+        MapWithStatus mapWithStatus = new MapWithStatus(img, status);
 
-        MapWithStatus mapWithStatus = new MapWithStatus(img,status);
-        return ResponseEntity.ok(mapWithStatus).getBody().getImg();
-
-        //Add call to map api to show interface
+        List<ResponseEntity> entities = new ArrayList<>();
+        entities.add(ResponseEntity.ok(mapWithStatus).getBody().getImg());
+        entities.add(statusResponse);
+        //return ResponseEntity.ok(mapWithStatus).getBody().getImg();
+//        return ResponseEntity.ok(mapWithStatus).getBody().getImg();
+//        return ResponseEntity.ok(entities);
+        return entities;
     }
 
 
