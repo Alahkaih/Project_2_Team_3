@@ -49,4 +49,23 @@ class CovidApiServiceTest {
         Assertions.assertEquals(responseEntity, res);
     }
 
+    @Test
+    public void shouldGetAllDataByCountrySuccessfully() {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode timelineNode = mapper.createObjectNode();
+        ((ObjectNode) timelineNode).put("5/21/22", 84952660);
+
+        VaccineDataDTO vaccineDataDTO = new VaccineDataDTO("Canada", timelineNode);
+
+        ResponseEntity<VaccineDataDTO> responseEntity = new ResponseEntity<VaccineDataDTO>(vaccineDataDTO, HttpStatus.ACCEPTED);
+        when(restTemplate.exchange(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.any(HttpMethod.class),
+                ArgumentMatchers.any(),
+                ArgumentMatchers.<Class<VaccineDataDTO>>any()))
+                .thenReturn(responseEntity);
+
+        ResponseEntity res = covidApiService.getAllDataByCountry("Canada");
+        Assertions.assertEquals(responseEntity, res);
+    }
 }
