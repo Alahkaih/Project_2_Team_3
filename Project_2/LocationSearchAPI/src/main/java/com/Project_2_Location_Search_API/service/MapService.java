@@ -21,7 +21,7 @@ public class MapService {
     private final String baseURL = "https://api.locationiq.com/v1";
     private final String mapBaseURL = "https://maps.locationiq.com/v3";
 
-    private ResponseEntity fetchRequest(String url) {
+    public ResponseEntity fetchRequest(String url) {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
@@ -32,7 +32,7 @@ public class MapService {
         return restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
     }
 
-    private ResponseEntity fetchImage(String url) {
+    public ResponseEntity fetchImage(String url) {
 
 
 
