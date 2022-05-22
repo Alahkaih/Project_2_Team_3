@@ -1,25 +1,44 @@
 package com.Project_2_Location_Search_API.service;
 
 import com.Project_2_Location_Search_API.entities.LocationQuery;
+import com.Project_2_Location_Search_API.entities.StatusReport;
 import com.Project_2_Location_Search_API.repositories.LocationQueryRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.engine.TestExecutionResult;
+import org.mockito.ArgumentMatchers;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class LocationQueryServiceTest {
-    private LocationQueryService locationQueryService;
+
     private LocationQueryRepository mockLocationQueryRepository;
+
+    @InjectMocks
+    private LocationQueryService locationQueryService = new LocationQueryService();
+
+    @Mock
+    private RestTemplate restTemplate;
 
     @BeforeEach
     public void initBefore() {
         mockLocationQueryRepository = mock(LocationQueryRepository.class);
-        locationQueryService = new LocationQueryService();
+//        locationQueryService = new LocationQueryService();
         locationQueryService.setLocationQueryRepository(mockLocationQueryRepository);
     }
 
@@ -129,4 +148,23 @@ public class LocationQueryServiceTest {
             locationQueryService.getAllByFilter("total_recovered",  "test", 0);
         });
     }
+
+//    @Test
+//    public void shouldGetRequestStatusReportByCountry(){
+//
+//        StatusReport statusReport = new StatusReport(1, 80.00, "Canada", LocalDate.parse("2022-05-21"), "Safe to travel");
+//
+//        doReturn(statusReport).when(restTemplate).getForObject(
+//                ArgumentMatchers.anyString(),
+//                ArgumentMatchers.<Class<StatusReport>>any());
+//
+////        Mockito.when(restTemplate.getForObject("http://localhost:8000/status/Canada", StatusReport.class))
+////                .thenReturn(statusReport);
+//
+////        Mockito.when(locationQueryService.requestStatusReportByCountry("Canada")).thenReturn(statusReport);
+//
+//        locationQueryService.requestStatusReportByCountry("Canada");
+//
+//        Assertions.assertEquals(123, statusReport);
+//    }
 }
