@@ -54,4 +54,23 @@ public class MapServiceTest {
         ResponseEntity res = mapService.getByPostalCode("10001", "US", "json");
         Assertions.assertEquals(responseEntity.getStatusCodeValue(), res.getStatusCodeValue());
     }
+/*
+    @Test
+    public void shouldFetchImage(){
+
+        String url = "http://localhost:8081/map/Canada";
+
+        CoordinatesDTO coordinatesDTO = new CoordinatesDTO("-98.5456116","31.2638905");
+        ResponseEntity<CoordinatesDTO> responseEntity = new ResponseEntity<>(coordinatesDTO, HttpStatus.OK);
+        when(restTemplate.exchange(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.any(HttpMethod.class),
+                ArgumentMatchers.any(),
+                ArgumentMatchers.<Class<CoordinatesDTO>>any()))
+                .thenReturn(responseEntity);
+
+        ResponseEntity response = mapService.fetchImage(url);
+        Assertions.assertEquals(responseEntity.getStatusCodeValue(), response.getStatusCodeValue());
+    }
+*/
 }

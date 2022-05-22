@@ -21,7 +21,7 @@ public class MapService {
     private final String baseURL = "https://api.locationiq.com/v1";
     private final String mapBaseURL = "https://maps.locationiq.com/v3";
 
-    public ResponseEntity fetchRequest(String url) {
+    private ResponseEntity fetchRequest(String url) {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
