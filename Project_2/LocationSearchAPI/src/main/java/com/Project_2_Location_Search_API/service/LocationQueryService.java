@@ -17,6 +17,9 @@ public class LocationQueryService {
     @Setter(onMethod = @__({@Autowired}))
     private LocationQueryRepository locationQueryRepository;
 
+    @Autowired
+    RestTemplate restTemplate = new RestTemplate();
+
 //    This code is now redundant but I will leave it just in case                   //
 //    public LocationQueryService(LocationQueryRepository locationQueryRepository) {
 //        super();
@@ -74,7 +77,6 @@ public class LocationQueryService {
     }
 
     public StatusReport requestStatusReportByCountry(String country){
-        RestTemplate restTemplate = new RestTemplate();
         StatusReport statusReport = restTemplate.getForObject("http://localhost:8000/status/"+ country, StatusReport.class);
         return new StatusReport(statusReport.getId(),statusReport.getScore(),statusReport.getLocation(),statusReport.getCreationDate(),statusReport.getStatus());
     }

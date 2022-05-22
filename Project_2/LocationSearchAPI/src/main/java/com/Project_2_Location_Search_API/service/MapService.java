@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,14 @@ import java.util.Arrays;
 @Slf4j
 public class MapService {
 
+    @Autowired
+    RestTemplate restTemplate = new RestTemplate();
+
     private final String key = "pk.4e3f27d87b71d3a12326e0641a621a8d";
     private final String baseURL = "https://api.locationiq.com/v1";
     private final String mapBaseURL = "https://maps.locationiq.com/v3";
 
     private ResponseEntity fetchRequest(String url) {
-        RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

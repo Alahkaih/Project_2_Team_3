@@ -13,6 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,7 @@ import java.util.List;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class LocationQueryServiceTest {
 
     private LocationQueryRepository mockLocationQueryRepository;
@@ -149,22 +152,20 @@ public class LocationQueryServiceTest {
         });
     }
 
-//    @Test
-//    public void shouldGetRequestStatusReportByCountry(){
-//
-//        StatusReport statusReport = new StatusReport(1, 80.00, "Canada", LocalDate.parse("2022-05-21"), "Safe to travel");
-//
+    @Test
+    public void shouldGetRequestStatusReportByCountry(){
+
+        StatusReport statusReport = new StatusReport(1, 80.00, "Canada", LocalDate.parse("2022-05-21"), "Safe to travel");
+
 //        doReturn(statusReport).when(restTemplate).getForObject(
 //                ArgumentMatchers.anyString(),
 //                ArgumentMatchers.<Class<StatusReport>>any());
-//
-////        Mockito.when(restTemplate.getForObject("http://localhost:8000/status/Canada", StatusReport.class))
-////                .thenReturn(statusReport);
-//
-////        Mockito.when(locationQueryService.requestStatusReportByCountry("Canada")).thenReturn(statusReport);
-//
-//        locationQueryService.requestStatusReportByCountry("Canada");
-//
-//        Assertions.assertEquals(123, statusReport);
-//    }
+
+        when(restTemplate.getForObject(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.<Class<StatusReport>>any()))
+                .thenReturn(statusReport);
+
+        Assertions.assertEquals(statusReport, locationQueryService.requestStatusReportByCountry("Canada"));
+    }
 }
