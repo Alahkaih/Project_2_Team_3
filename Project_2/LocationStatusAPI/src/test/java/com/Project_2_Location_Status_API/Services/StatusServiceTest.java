@@ -4,15 +4,12 @@ import com.Project_2_Location_Status_API.DTO.CovidStatsDTO;
 import com.Project_2_Location_Status_API.DTO.VaccineDataDTO;
 import com.Project_2_Location_Status_API.Entities.StatusReport;
 import com.Project_2_Location_Status_API.Repositories.StatusRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.internal.matchers.Null;
 
 import java.time.LocalDate;
 
