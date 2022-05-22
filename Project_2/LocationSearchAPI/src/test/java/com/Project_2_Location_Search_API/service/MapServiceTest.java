@@ -28,7 +28,6 @@ public class MapServiceTest {
 
     @Test
     public void shouldGetLocationInfo(){
-
         ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
         when(restTemplate.exchange(
                 ArgumentMatchers.anyString(),
@@ -36,13 +35,25 @@ public class MapServiceTest {
                 ArgumentMatchers.any(),
                 ArgumentMatchers.<Class<String>>any()))
                 .thenReturn(responseEntity);
-
         ResponseEntity res = mapService.getLocationInfo("India", "json");
         Assertions.assertEquals(responseEntity.getStatusCodeValue(), res.getStatusCodeValue());
     }
 
+//    @Test
+//    public void shouldGetByPostalCode(){
+//        ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
+//        when(restTemplate.exchange(
+//                ArgumentMatchers.anyString(),
+//                ArgumentMatchers.any(HttpMethod.class),
+//                ArgumentMatchers.any(),
+//                ArgumentMatchers.<Class<String>>any()))
+//                .thenReturn(responseEntity);
+//        ResponseEntity res = mapService.getByPostalCode("10001", "us", "json");
+//        Assertions.assertEquals(responseEntity.getStatusCodeValue(), res.getStatusCodeValue());
+//    }
+
     @Test
-    public void shouldGetByPostalCode(){
+    public void shouldGetByStructured() {
         ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
         when(restTemplate.exchange(
                 ArgumentMatchers.anyString(),
@@ -50,27 +61,68 @@ public class MapServiceTest {
                 ArgumentMatchers.any(),
                 ArgumentMatchers.<Class<String>>any()))
                 .thenReturn(responseEntity);
-
-        ResponseEntity res = mapService.getByPostalCode("10001", "US", "json");
+        ResponseEntity res = mapService.getByStructured("20 W 34th St", "New York", "New York County", "New York", "United States of America", "10001", "json");
         Assertions.assertEquals(responseEntity.getStatusCodeValue(), res.getStatusCodeValue());
     }
-/*
+
+//    @Test
+//    public void shouldGetByQuery() {
+//        ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
+//        when(restTemplate.exchange(
+//                ArgumentMatchers.anyString(),
+//                ArgumentMatchers.any(HttpMethod.class),
+//                ArgumentMatchers.any(),
+//                ArgumentMatchers.<Class<String>>any()))
+//                .thenReturn(responseEntity);
+//        ResponseEntity res = mapService.getByQuery("Empire State Building", "json");
+//        Assertions.assertEquals(responseEntity.getStatusCodeValue(), res.getStatusCodeValue());
+//    }
+
     @Test
-    public void shouldFetchImage(){
-
-        String url = "http://localhost:8081/map/Canada";
-
-        CoordinatesDTO coordinatesDTO = new CoordinatesDTO("-98.5456116","31.2638905");
-        ResponseEntity<CoordinatesDTO> responseEntity = new ResponseEntity<>(coordinatesDTO, HttpStatus.OK);
+    public void shouldGetStateInfo() {
+        ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
         when(restTemplate.exchange(
                 ArgumentMatchers.anyString(),
                 ArgumentMatchers.any(HttpMethod.class),
                 ArgumentMatchers.any(),
-                ArgumentMatchers.<Class<CoordinatesDTO>>any()))
+                ArgumentMatchers.<Class<String>>any()))
                 .thenReturn(responseEntity);
-
-        ResponseEntity response = mapService.fetchImage(url);
-        Assertions.assertEquals(responseEntity.getStatusCodeValue(), response.getStatusCodeValue());
+        ResponseEntity res = mapService.getStateInfo("Texas", "json", "us");
+        Assertions.assertEquals(responseEntity.getStatusCodeValue(), res.getStatusCodeValue());
     }
-*/
+
+    @Test
+    public void getStateInfoShouldThrowException() {
+        ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
+        UnsupportedOperationException ex = Assertions.assertThrows(UnsupportedOperationException.class, () -> {
+            mapService.getStateInfo("Ontario", "json", "us");
+        });
+        Assertions.assertEquals("US states only", ex.getMessage(), "Exception not thrown when entered a non-US state");
+    }
+
+    @Test
+    public void shouldGetGeneral() {
+        ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
+        when(restTemplate.exchange(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.any(HttpMethod.class),
+                ArgumentMatchers.any(),
+                ArgumentMatchers.<Class<String>>any()))
+                .thenReturn(responseEntity);
+        ResponseEntity res = mapService.getGeneral("Empire State Building");
+        Assertions.assertEquals(responseEntity.getStatusCodeValue(), res.getStatusCodeValue());
+    }
+
+    @Test
+    public void shouldGetLocationMap() {
+        ResponseEntity<String> responseEntity = new ResponseEntity<String>(HttpStatus.OK);
+        when(restTemplate.exchange(
+                ArgumentMatchers.anyString(),
+                ArgumentMatchers.any(HttpMethod.class),
+                ArgumentMatchers.any(),
+                ArgumentMatchers.<Class<String>>any()))
+                .thenReturn(responseEntity);
+        ResponseEntity res = mapService.getLocationMap("India", "json");
+        Assertions.assertEquals(responseEntity.getStatusCodeValue(), res.getStatusCodeValue());
+    }
 }
