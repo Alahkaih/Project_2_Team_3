@@ -5,6 +5,8 @@ import com.Project_2_Location_Search_API.entities.StatusReport;
 import com.Project_2_Location_Search_API.repositories.LocationQueryRepository;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
