@@ -64,7 +64,7 @@ public class MapService {
             logger.debug("Image fetched");
             return response;
         } catch( HttpServerErrorException hse ){
-            logger.error("Server error, cannot fetch image");
+            logger.debug("Server error, cannot fetch image");
             throw hse;
         }
     }

@@ -32,7 +32,7 @@ public class StatusService {
             logger.debug("Status report retrieved");
             return op;
         } else {
-            logger.error("Status report is null and can't be found");
+            logger.debug("Status report is null and can't be found");
             throw new NullPointerException(location + " could not be found");
         }
     }
@@ -49,16 +49,16 @@ public class StatusService {
 
     public void saveNewStatus(StatusReport statusReport) {
         if (statusReport.getLocation() == null || statusReport.getLocation().isEmpty()) {
-            logger.error(statusReport.getLocation());
+            logger.debug("Location is null or empty");
             throw new NullPointerException("Can't create a statusReport without a location");
         } else if (statusReport.getScore() == 0 || statusReport.getScore() < 0) {
-            logger.error(Double.toString(statusReport.getScore()));
+            logger.debug(Double.toString(statusReport.getScore()));
             throw new NullPointerException("Can't create a statusReport with a null or negative score");
         } else if (statusReport.getCreationDate() == null) {
-            logger.error(statusReport.getCreationDate().toString());
+            logger.debug("Creation date is null");
             throw new NullPointerException("Can't create a statusReport with a null creation date");
         } else if (statusReport.getCreationDate().isAfter(LocalDate.now())) {
-            logger.error(statusReport.getCreationDate().toString());
+            logger.debug(statusReport.getCreationDate().toString());
             throw new NullPointerException("Can't create a statusReport with a date in the future");
         } else {
             statusRepository.save(statusReport);

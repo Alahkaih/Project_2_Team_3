@@ -45,28 +45,28 @@ public class LocationQueryService {
      */
     public LocationQuery saveSearch(LocationQuery locationQuery) {
         if(locationQuery.getLocationName() == null || locationQuery.getLocationName().isEmpty()) {
-            logger.error(locationQuery.getLocationName());
+            logger.error("Searching by location name");
             throw new NullPointerException("Location name can't be null");
         } else if(locationQuery.getStatus() == null || locationQuery.getStatus().isEmpty()) {
-            logger.error(locationQuery.getStatus());
+            logger.error("Searching by status");
             throw new NullPointerException("Status can't be null");
         } else if(locationQuery.getPopulation() == null) {
-            logger.error(locationQuery.getPopulation().toString());
+            logger.error("Searching by population");
             throw new NullPointerException("Population can't be null");
         } else if(locationQuery.getVaccinated() == null) {
-            logger.error(locationQuery.getVaccinated().toString());
+            logger.error("Searching by total vaccinated");
             throw new NullPointerException("Vaccinated can't be null");
         } else if(locationQuery.getTotalInfections() == null) {
-            logger.error(locationQuery.getTotalInfections().toString());
+            logger.error("Searching by total infected");
             throw new NullPointerException("Total infections can't be null");
         } else if(locationQuery.getTotalDeaths() == null) {
-            logger.error(locationQuery.getTotalDeaths().toString());
+            logger.error("Searching by total deaths");
             throw new NullPointerException("Total deaths can't be null");
         } else if(locationQuery.getTotalRecovered() == null) {
-            logger.error(locationQuery.getTotalRecovered().toString());
+            logger.error("Searching by total recovered");
             throw new NullPointerException("Total recovered can't be null");
         } else {
-            logger.debug("Successfully save data");
+            logger.error("Successfully save data");
             return locationQueryRepository.save(locationQuery);
         }
     }
